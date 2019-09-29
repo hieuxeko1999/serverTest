@@ -15,6 +15,12 @@ router.get('/:page', function(req, res, next){
     res.json(pageData);
 })
 
+
+api.get('/', function(req, res, next){
+    var pathFile = path.join(__dirname, "template.html");
+    res.sendFile(pathFile)
+})
+
 api.listen(3000, function(){
     console.log("Server is listening at port 3000");
 })
