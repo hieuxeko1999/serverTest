@@ -4,7 +4,7 @@
   "main": "Card.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon dataAPI.js"
+    "start": "node dataAPI.js"
   },
   "author": "",
   "license": "ISC",
