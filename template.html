@@ -19,9 +19,9 @@
 <script>
     $('#page1').click(function(){
     $.ajax({
-        url:"https://a2eb7d39.ngrok.io/api/v1/1"
+        url:"https://cfdd82f4.ngrok.io/data/v1/1"
     }).then(function(res){
-            res.data.array.forEach(element => {
+            res.data.forEach(function(item){
                 var card = $(`<div class="card" style="width: 18rem;">
                     <img src="${element.name}" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -30,8 +30,10 @@
                         <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
                     </div>`)
-            });
-            $('body').append(card);
+                $('body').append(card);
+            })
+            
+            
     }).catch(function(err){
         console.log(err);
     })})
