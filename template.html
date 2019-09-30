@@ -9,34 +9,46 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+   
 </head>
 <body>
-    <button type="" id="page1">Page1</button>
-    
+    <!-- <button type="" id="page1">Page1</button> -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <!-- <li class="page-item"><a class="page-link" href="#">Previous</a></li> -->
+          <li class="page-item"><button type="" id="page1" onclick="loadPage(1)">Page1</button></li>
+          <li class="page-item"><button type="" id="page2" onclick="loadPage(2)">Page2</button></li>
+          <li class="page-item"><button type="" id="page3" onclick="loadPage(3)">Page3</button></li>
+          <!-- <li class="page-item"><a class="page-link" href="#">Next</a></li> -->
+        </ul>
+      </nav>
+    <div class="row" id="content"></div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-    $('#page1').click(function(){
+    
+    function loadPage(page){
+    $('#content').html("");
     $.ajax({
-        url:"https://cfdd82f4.ngrok.io/data/v1/1"
+        url:"http://localhost:3000/data/v1/" + page
     }).then(function(res){
-            res.data.forEach(function(item){
-                var card = $(`<div class="card" style="width: 18rem;">
-                    <img src="${element.name}" class="card-img-top" alt="...">
+            res.forEach(function(element){
+                var card = $(`<div class="card col-md-3 px-2" style="width: 18rem;">
+                    <img src="${element.image}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <h5 class="card-title">${element.title}</h5>
+                        <p class="card-text">This is random image nod &nbsp${element.number}</p>
                     </div>
                     </div>`)
-                $('body').append(card);
+                    $('#content').append(card);                
             })
             
             
     }).catch(function(err){
         console.log(err);
-    })})
+    })}
 </script>
 
 </html>

@@ -6,17 +6,19 @@ var data = require('./data');
 
 var api = express(); // create new server
 api.use('/data/v1', router);
-
+var cardInPage = 12;
 router.get('/:page', function(req, res, next){
-    var page = parseInt(req.params.page)
-    var start = page * 10;
-    var end = start + 10;
+    var page = parseInt(req.params.page) - 1;
+    page = (page < 0) ? 0:page;
+    
+    var start = page * cardInPage;  
+    var end = start + cardInPage;
     var pageData = data.slice(start, end);
     res.json(pageData);
 })
 
 
-api.get('/', function(req, res, next){
+api.get('/home', function(req, res, next){
     var pathFile = path.join(__dirname, "template.html");
     res.sendFile(pathFile)
 })
