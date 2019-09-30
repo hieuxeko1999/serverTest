@@ -23,6 +23,6 @@ api.get('/home', function(req, res, next){
     res.sendFile(pathFile)
 })
 
-api.listen(3000, function(){
+api.listen(process.env.PORT || 3000, function(){
     console.log("Server is listening at port 3000");
 })
